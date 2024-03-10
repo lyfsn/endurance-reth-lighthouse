@@ -1,0 +1,32 @@
+
+python3 bootnode.py
+
+
+
+export IP_ADDRESS=$(curl -4 https://icanhazip.com/)
+
+if [ -z "$IP_ADDRESS" ]; then
+    echo "Failed to retrieve IP address"
+    exit 1
+fi
+
+export CL_CHECKPOINT=https://checkpointz.fusionist.io/
+
+echo "Using IP address: $IP_ADDRESS"
+
+
+# Read contents from files and assign to variables
+EL_BOOTNODES=enode://164276f9943a38d527c5e53eb41677397c0abfdb83f4d78bf92aa7e1b2eddb9d6f22016a9ecb4d69bc6df0f67ca1bc57cc70431f188ef630646776bf2452d733@35.208.65.186:30303,enode://630a3bfc641634870db1b10b8a66e37d123eb00e824e616bd85f3ec7394ae7d0a07edd5e73847036e62ecc39691351256cfe89c57a22fedca7241d7942da6fe8@138.201.159.60:30303,enode://fc56df1424e7d50c4b1d8ce45dce1fc34644a0c85b410d5598c6e792480fae9bd6088abbe8d4a4346670613485f6b3353827fc4ec5d0fd0b79b1feb6eca21f68@65.109.226.1:30303
+CL_TRUSTPEERS=16Uiu2HAkvgWMqm7uwfVFXAu4uf9zp8AA7snx5ucugsFwtKY1nKuV,16Uiu2HAmRRLVCGqqvoRQjJMRuqAVLE7dsFCDA5GskZZdtSCqWseg,16Uiu2HAmPjJZj7gQEtvkiWxevMkE2JDbDZpYVRZKnZ19PELcVJUX
+CL_BOOTNODES=enr:-MW4QAwoEWfZDuuXReNmqj-idvF60M95MHWkKFKBiEu9dzHOfTtORfMAOcSCS31wk7hgDWQhl5MADg6ftDo4deaPC4KBi4dhdHRuZXRziP__________hGV0aDKQsuwEFlAAAAH__________4JpZIJ2NIJpcIQj0EG6hHF1aWOCIymJc2VjcDI1NmsxoQISqIWX8lsM2l9k08wtjOlZ_Rehf03jO9YjBle_H_j51IhzeW5jbmV0cw-DdGNwgiMog3VkcIIjKA,enr:-MK4QNGrzIvpYcTqD4gjltgIJUyYjkc3POlyGAhVconi08fUMEdooxbIxpQaERuUGxPpG4YbNRm5ORXeK-uuTOKMOgGGAY4MsJdbh2F0dG5ldHOIAAAAYAAAAACEZXRoMpCy7AQWUAAAAf__________gmlkgnY0gmlwhIrJnzyJc2VjcDI1NmsxoQO9qJEgZwPlM48KvXc5IN2gjCeXpjU-AI8aFa_hAiGAuYhzeW5jbmV0cwCDdGNwgjLIg3VkcIIu4A,enr:-MK4QPosWQfluWCCGGe2GIdBBCP8RmjAYdbPOX9kw1Uzuy-xeJMhEOI7CPxlR0qu2S1omal6_lKff12fpuWcwXaJcoCGAY4MtFdBh2F0dG5ldHOIAAAABgAAAACEZXRoMpCy7AQWUAAAAf__________gmlkgnY0gmlwhEFt4gGJc2VjcDI1NmsxoQOki3l8IAnD0LYrbdieyHOF9X7TgLGiTQsTUGCgmS8uUIhzeW5jbmV0cwCDdGNwgjLIg3VkcIIu4A
+CL_STATICPEERS=/ip4/35.208.65.186/tcp/9000/p2p/16Uiu2HAkvgWMqm7uwfVFXAu4uf9zp8AA7snx5ucugsFwtKY1nKuV,/ip4/138.201.159.60/tcp/13000/p2p/16Uiu2HAmRRLVCGqqvoRQjJMRuqAVLE7dsFCDA5GskZZdtSCqWseg,/ip4/65.109.226.1/tcp/13000/p2p/16Uiu2HAmPjJZj7gQEtvkiWxevMkE2JDbDZpYVRZKnZ19PELcVJUX
+
+# Export the variables
+export EL_BOOTNODES
+export CL_TRUSTPEERS
+export CL_BOOTNODES
+export CL_STATICPEERS
+
+docker compose -f compose.yaml up -d
+
+
